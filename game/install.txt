@@ -1,0 +1,12 @@
+Instructions for Sudoku File:
+
+1. Download the source code
+
+2. All files, including the json, needed are in the source code
+
+3. This is similar to A3. Type in the command "make play" in order to 
+    start the game.
+
+4. Type in the json file name in the source code
+
+5. Follow the commands given to complete the sudoku puzzle

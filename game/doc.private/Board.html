@@ -1,0 +1,386 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="Start" href="index.html">
+<link rel="next" href="Command.html">
+<link rel="Up" href="index.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of exceptions" rel=Appendix href="index_exceptions.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Board" rel="Chapter" href="Board.html">
+<link title="Command" rel="Chapter" href="Command.html">
+<link title="State" rel="Chapter" href="State.html">
+<link title="Main" rel="Chapter" href="Main.html">
+<link title="Generator" rel="Chapter" href="Generator.html"><title>Board</title>
+</head>
+<body>
+<div class="navbar">&nbsp;<a class="up" href="index.html" title="Index">Up</a>
+&nbsp;<a class="post" href="Command.html" title="Command">Next</a>
+</div>
+<h1>Module <a href="type_Board.html">Board</a></h1>
+
+<pre><span id="MODULEBoard"><span class="keyword">module</span> Board</span>: <code class="code">sig</code> <a href="Board.html">..</a> <code class="code">end</code></pre><div class="info module top">
+<div class="info-desc">
+<p>The abstract type of values representing Sudoku games</p>
+</div>
+</div>
+<hr width="100%">
+
+<pre><code><span id="TYPEbox"><span class="keyword">type</span> <code class="type"></code>box</span> = </code></pre><table class="typetable">
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTbox.Guess"><span class="constructor">Guess</span></span> <span class="keyword">of</span> <code class="type">int</code></code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTbox.Final"><span class="constructor">Final</span></span> <span class="keyword">of</span> <code class="type">int</code></code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTbox.Empty"><span class="constructor">Empty</span></span></code></td>
+
+</tr></table>
+
+<div class="info ">
+<div class="info-desc">
+<p>The type representing a single box</p>
+</div>
+</div>
+
+
+<pre><span id="TYPEboard"><span class="keyword">type</span> <code class="type"></code>board</span> = <code class="type">(string * <a href="Board.html#TYPEbox">box</a>) list</code> </pre>
+<div class="info ">
+<div class="info-desc">
+<p>The type of values representing board objects</p>
+</div>
+</div>
+
+
+<pre><code><span id="TYPEt"><span class="keyword">type</span> <code class="type"></code>t</span> = {</code></pre><table class="typetable">
+<tr>
+<td align="left" valign="top" >
+<code>&nbsp;&nbsp;</code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTt.puzzle">puzzle</span>&nbsp;: <code class="type"><a href="Board.html#TYPEboard">board</a></code>;</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code>&nbsp;&nbsp;</code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTt.answer">answer</span>&nbsp;: <code class="type"><a href="Board.html#TYPEboard">board</a></code>;</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code>&nbsp;&nbsp;</code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTt.description">description</span>&nbsp;: <code class="type">string</code>;</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code>&nbsp;&nbsp;</code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTt.difficulty">difficulty</span>&nbsp;: <code class="type">int</code>;</code></td>
+
+</tr></table>
+}
+
+<div class="info ">
+<div class="info-desc">
+<p>The abstract type representing a sudoku game</p>
+</div>
+</div>
+
+
+<pre><span id="EXCEPTIONInvalidKey"><span class="keyword">exception</span> InvalidKey</span></pre>
+<div class="info ">
+<div class="info-desc">
+<p>Thrown when a key is invalid</p>
+</div>
+</div>
+
+<pre><span id="EXCEPTIONInvalidValue"><span class="keyword">exception</span> InvalidValue</span></pre>
+<div class="info ">
+<div class="info-desc">
+<p>Thrown when a value is invalid</p>
+</div>
+</div>
+
+<pre><span id="VALto_box"><span class="keyword">val</span> to_box</span> : <code class="type">int -> <a href="Board.html#TYPEbox">box</a></code></pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">to_box num</code> initializes num in box form</p>
+</div>
+</div>
+
+<pre><span id="VALform_row"><span class="keyword">val</span> form_row</span> : <code class="type">Yojson.Basic.t -> int list</code></pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">form_row json</code> is a list of integers from the given <code class="code">json</code> file</p>
+</div>
+</div>
+
+<pre><span id="VALto_board"><span class="keyword">val</span> to_board</span> : <code class="type">int list list -> (string * <a href="Board.html#TYPEbox">box</a>) list</code></pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">to_board lst</code> is a board representation of <code class="code">lst</code> 
+    Requires: <code class="code">lst</code> contains 9 elements, each containing 9 elements</p>
+</div>
+</div>
+
+<pre><span id="VALget_puzzle"><span class="keyword">val</span> get_puzzle</span> : <code class="type"><a href="Board.html#TYPEt">t</a> -> <a href="Board.html#TYPEboard">board</a></code></pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">get_puzzle t</code> Returns t.puzzle, the current puzzle.</p>
+</div>
+</div>
+
+<pre><span id="VALget_answer"><span class="keyword">val</span> get_answer</span> : <code class="type"><a href="Board.html#TYPEt">t</a> -> <a href="Board.html#TYPEboard">board</a></code></pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">get_answer t</code> Returns t.answer, the current puzzle's answer key.</p>
+</div>
+</div>
+
+<pre><span id="VALget_box"><span class="keyword">val</span> get_box</span> : <code class="type">string -> <a href="Board.html#TYPEboard">board</a> -> <a href="Board.html#TYPEbox">box</a></code></pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">get_box key g b</code> is the box at the given key of the puzzle board if b, 
+    otherwise is the box at the given key of the answer board. For example,
+    <code class="code">get_box "a4" g true</code> returns the key at row a, column 4 of the puzzle 
+    board. 
+    Raises <code class="code">InvalidKey</code> if the key is ill typed.</p>
+</div>
+</div>
+
+<pre><span id="VALset_box"><span class="keyword">val</span> set_box</span> : <code class="type">string -> int -> <a href="Board.html#TYPEboard">board</a> -> (string * <a href="Board.html#TYPEbox">box</a>) list</code></pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">set_box key g new</code> is <code class="code">g</code> with the box at the given key of the puzzle board
+    switched to <code class="code">Guess new</code>. For example, <code class="code">set_box "a4" game 4</code> returns game with
+    the box at row a, column 4 of the puzzle board now Guess 4.
+    Raises <code class="code">InvalidKey</code> if the key is ill typed</p>
+</div>
+</div>
+
+<pre><span id="VALcheck"><span class="keyword">val</span> check</span> : <code class="type"><a href="Board.html#TYPEboard">board</a> -> <a href="Board.html#TYPEboard">board</a> -> <a href="Board.html#TYPEboard">board</a></code></pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">check puzzle answer</code> Returns the new state of the puzzle after comparing
+    user's inputs to answer key.</p>
+</div>
+</div>
+
+<pre><span id="VALclear_helper"><span class="keyword">val</span> clear_helper</span> : <code class="type"><a href="Board.html#TYPEbox">box</a> -> <a href="Board.html#TYPEbox">box</a></code></pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">clear_helper box</code> clear helper removes any guesses from the board.</p>
+</div>
+</div>
+
+<pre><span id="VALclear"><span class="keyword">val</span> clear</span> : <code class="type">('a * <a href="Board.html#TYPEbox">box</a>) list -> ('a * <a href="Board.html#TYPEbox">box</a>) list</code></pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">clear puzzle</code> returns the puzzle after it has removed all guesses.</p>
+</div>
+</div>
+
+<pre><span id="VALhint_list"><span class="keyword">val</span> hint_list</span> : <code class="type">('a * <a href="Board.html#TYPEbox">box</a>) list -> 'a list -> 'a list</code></pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">hint_list puzzle acc</code> makes a list of the empty keys from the board.</p>
+</div>
+</div>
+
+<pre><span id="VALget_hint"><span class="keyword">val</span> get_hint</span> : <code class="type">string list -> string</code></pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">get_hint hints</code> returns the first element of the hint list.</p>
+</div>
+</div>
+
+<pre><span id="VALhint"><span class="keyword">val</span> hint</span> : <code class="type">(string * <a href="Board.html#TYPEbox">box</a>) list -><br>       (string * <a href="Board.html#TYPEbox">box</a>) list -> (string * <a href="Board.html#TYPEbox">box</a>) list</code></pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">hint puzzle answer</code> returns a board after the hint was applied.</p>
+</div>
+</div>
+
+<pre><span id="VALwinner"><span class="keyword">val</span> winner</span> : <code class="type">'a list -> 'a list -> bool</code></pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">winner puzzle answer</code> retunrs true if the puzzle is completed and checked
+    with the answer key.</p>
+</div>
+</div>
+
+<pre><code><span id="TYPEsolving"><span class="keyword">type</span> <code class="type"></code>solving</span> = </code></pre><table class="typetable">
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTsolving.Working"><span class="constructor">Working</span></span> <span class="keyword">of</span> <code class="type"><a href="Board.html#TYPEboard">board</a></code></code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTsolving.Failed"><span class="constructor">Failed</span></span></code></td>
+
+</tr></table>
+
+<div class="info ">
+<div class="info-desc">
+<p>The type representing a partially solved sudoku board</p>
+</div>
+</div>
+
+
+<pre><code><span id="TYPEresult"><span class="keyword">type</span> <code class="type"></code>result</span> = </code></pre><table class="typetable">
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTresult.MultSol"><span class="constructor">MultSol</span></span></code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTresult.OneSol"><span class="constructor">OneSol</span></span> <span class="keyword">of</span> <code class="type"><a href="Board.html#TYPEboard">board</a></code></code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTresult.NoSol"><span class="constructor">NoSol</span></span></code></td>
+
+</tr></table>
+
+<div class="info ">
+<div class="info-desc">
+<p>The type representing a result of solving</p>
+</div>
+</div>
+
+
+<pre><span id="VALbox1"><span class="keyword">val</span> box1</span> : <code class="type">string list</code></pre>
+<pre><span id="VALbox2"><span class="keyword">val</span> box2</span> : <code class="type">string list</code></pre>
+<pre><span id="VALbox3"><span class="keyword">val</span> box3</span> : <code class="type">string list</code></pre>
+<pre><span id="VALbox4"><span class="keyword">val</span> box4</span> : <code class="type">string list</code></pre>
+<pre><span id="VALbox5"><span class="keyword">val</span> box5</span> : <code class="type">string list</code></pre>
+<pre><span id="VALbox6"><span class="keyword">val</span> box6</span> : <code class="type">string list</code></pre>
+<pre><span id="VALbox7"><span class="keyword">val</span> box7</span> : <code class="type">string list</code></pre>
+<pre><span id="VALbox8"><span class="keyword">val</span> box8</span> : <code class="type">string list</code></pre>
+<pre><span id="VALbox9"><span class="keyword">val</span> box9</span> : <code class="type">string list</code></pre>
+<pre><span id="VALrow1"><span class="keyword">val</span> row1</span> : <code class="type">string list</code></pre>
+<pre><span id="VALrow2"><span class="keyword">val</span> row2</span> : <code class="type">string list</code></pre>
+<pre><span id="VALrow3"><span class="keyword">val</span> row3</span> : <code class="type">string list</code></pre>
+<pre><span id="VALrow4"><span class="keyword">val</span> row4</span> : <code class="type">string list</code></pre>
+<pre><span id="VALrow5"><span class="keyword">val</span> row5</span> : <code class="type">string list</code></pre>
+<pre><span id="VALrow6"><span class="keyword">val</span> row6</span> : <code class="type">string list</code></pre>
+<pre><span id="VALrow7"><span class="keyword">val</span> row7</span> : <code class="type">string list</code></pre>
+<pre><span id="VALrow8"><span class="keyword">val</span> row8</span> : <code class="type">string list</code></pre>
+<pre><span id="VALrow9"><span class="keyword">val</span> row9</span> : <code class="type">string list</code></pre>
+<pre><span id="VALcol1"><span class="keyword">val</span> col1</span> : <code class="type">string list</code></pre>
+<pre><span id="VALcol2"><span class="keyword">val</span> col2</span> : <code class="type">string list</code></pre>
+<pre><span id="VALcol3"><span class="keyword">val</span> col3</span> : <code class="type">string list</code></pre>
+<pre><span id="VALcol4"><span class="keyword">val</span> col4</span> : <code class="type">string list</code></pre>
+<pre><span id="VALcol5"><span class="keyword">val</span> col5</span> : <code class="type">string list</code></pre>
+<pre><span id="VALcol6"><span class="keyword">val</span> col6</span> : <code class="type">string list</code></pre>
+<pre><span id="VALcol7"><span class="keyword">val</span> col7</span> : <code class="type">string list</code></pre>
+<pre><span id="VALcol8"><span class="keyword">val</span> col8</span> : <code class="type">string list</code></pre>
+<pre><span id="VALcol9"><span class="keyword">val</span> col9</span> : <code class="type">string list</code></pre>
+<pre><span id="VALgroup"><span class="keyword">val</span> group</span> : <code class="type">(int * string list) list</code></pre>
+<pre><span id="VALrows"><span class="keyword">val</span> rows</span> : <code class="type">(int * string list) list</code></pre>
+<pre><span id="VALcols"><span class="keyword">val</span> cols</span> : <code class="type">(int * string list) list</code></pre>
+<pre><span id="VALforward"><span class="keyword">val</span> forward</span> : <code class="type">int list</code></pre>
+<pre><span id="VALbackward"><span class="keyword">val</span> backward</span> : <code class="type">int list</code></pre>
+<pre><code><span id="TYPEspot"><span class="keyword">type</span> <code class="type"></code>spot</span> = </code></pre><table class="typetable">
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTspot.Group"><span class="constructor">Group</span></span></code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTspot.Rows"><span class="constructor">Rows</span></span></code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTspot.Cols"><span class="constructor">Cols</span></span></code></td>
+
+</tr></table>
+
+<div class="info ">
+<div class="info-desc">
+<p>The type representing sections of the board</p>
+</div>
+</div>
+
+
+<pre><span id="VALnumify"><span class="keyword">val</span> numify</span> : <code class="type">string -> int * int</code></pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">numify k</code> is the coordinate representation of <code class="code">k</code>. For example, 
+    <code class="code">numify "a4" is (1, 4)</code></p>
+</div>
+</div>
+
+<pre><span id="VALget_spot"><span class="keyword">val</span> get_spot</span> : <code class="type">string -> <a href="Board.html#TYPEspot">spot</a> -> string list</code></pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">get_spot k s</code> is the either the column, group, or row, that <code class="code">k</code> is in,
+    based on what region <code class="code">s</code> is</p>
+</div>
+</div>
+
+<pre><span id="VALvalid"><span class="keyword">val</span> valid</span> : <code class="type">int -> string -> <a href="Board.html#TYPEboard">board</a> -> bool</code></pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">valid i k bd</code> is whether or not the number <code class="code">i</code> is allowed to go in 
+    position <code class="code">k</code> in board <code class="code">bd</code></p>
+</div>
+</div>
+
+<pre><span id="VALsolve"><span class="keyword">val</span> solve</span> : <code class="type">int list -> <a href="Board.html#TYPEboard">board</a> -> <a href="Board.html#TYPEsolving">solving</a></code></pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">solve b</code> is <code class="code">Working sol</code> where sol is the solved board of <code class="code">b</code>, or <code class="code">Failed</code>
+    is there is no solution</p>
+</div>
+</div>
+
+<pre><span id="VALsolution"><span class="keyword">val</span> solution</span> : <code class="type"><a href="Board.html#TYPEboard">board</a> -> <a href="Board.html#TYPEresult">result</a></code></pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">solution b</code> is the solution to the board <code class="code">b</code></p>
+</div>
+</div>
+
+<pre><span id="VALget_solution"><span class="keyword">val</span> get_solution</span> : <code class="type"><a href="Board.html#TYPEboard">board</a> -> <a href="Board.html#TYPEboard">board</a></code></pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">get_solution b</code> is the solution of the board <code class="code">b</code>
+    Required: <code class="code">b</code> only has one solution</p>
+</div>
+</div>
+
+<pre><span id="VALmake_game"><span class="keyword">val</span> make_game</span> : <code class="type">Yojson.Basic.t -> <a href="Board.html#TYPEt">t</a></code></pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">make_game j</code> is the game that <code class="code">j</code> represents.
+    Requires: <code class="code">j</code> is a valid JSON adventure representation.</p>
+</div>
+</div>
+
+<pre><span id="VALmake_game_from_gen"><span class="keyword">val</span> make_game_from_gen</span> : <code class="type"><a href="Board.html#TYPEboard">board</a> -> <a href="Command.html#TYPEdifficulty">Command.difficulty</a> -> <a href="Board.html#TYPEt">t</a></code></pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">make_game_from_gen board diff</code> generates a game with board <code class="code">board</code> and 
+    difficult <code class="code">diff</code></p>
+</div>
+</div>
+</body></html>
